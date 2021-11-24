@@ -33,7 +33,7 @@ class Program
         // To get the commands from category.
         Console.WriteLine($"\nGeneral Commands: {string.Join(" | ", handler.GetCommandsFromCategory("General") ?? new string[1])}");
 
-        // To get all all of the commands from the assembly.
+        // To get all of the commands from the assembly.
         Console.WriteLine($"\nCommands: {string.Join(" | ", handler.GetCommands())}");
     }
 }
