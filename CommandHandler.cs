@@ -149,21 +149,16 @@ public sealed class CommandHandler
         foreach (string p in _prefixes)
         {
             if (content.ToLower().Contains(p) && (p[0] == content[0])) return p;
-            continue;
         }
         return null;
     }
     private CommandInfo? GetCommand(string commandName)
     {
-        string[]? target = null;
         foreach (string[] commandNames in _exeCommands.Keys)
         {
-            if (!commandNames.Contains(commandName)) continue;
-            target = commandNames;
-            break;
+            if (commandNames.Contains(commandName)) return _exeCommands[commandNames];
         }
 
-        if (target == null) return null;
-        return _exeCommands[target];
+        return null;
     }
 }
