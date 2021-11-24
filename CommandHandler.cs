@@ -158,7 +158,6 @@ public sealed class CommandHandler
         {
             if (commandNames.Contains(commandName)) return _exeCommands[commandNames];
         }
-
         return null;
     }
 }
