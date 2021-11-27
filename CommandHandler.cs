@@ -84,11 +84,11 @@ public sealed class CommandHandler
     /// <summary>
     /// Get the list of commands from category.
     /// </summary>
-    public string[]? GetCommandsFromCategory(string categoryName)
+    public string[] GetCommandsFromCategory(string categoryName)
     {
-        if (_categories == null) return null;
+        if (_categories == null) return new string[0];
         _categories.TryGetValue(categoryName, out List<string> cmds);
-        return cmds?.ToArray();
+        return cmds?.ToArray() ?? new string[0];
     }
 
     /// <summary>
