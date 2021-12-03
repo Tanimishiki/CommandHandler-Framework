@@ -108,7 +108,7 @@ public sealed class CommandHandler
     /// <param name="data">
     /// This is just an extra argument if you want to pass something to the command that you can use.
     /// </param>
-    public void Execute(string content, object? data)
+    public void Execute(string content, object[]? data)
     {
         if (string.IsNullOrEmpty(content)) return;
 
