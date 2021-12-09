@@ -108,7 +108,7 @@ public sealed class CommandHandler
     /// <param name="data">
     /// This is just an extra argument if you want to pass something to the command that you can use.
     /// </param>
-    public void Execute(string content, object[]? data)
+    public void Execute(string content, params object[]? data)
     {
         if (string.IsNullOrEmpty(content)) return;
 
@@ -141,6 +141,10 @@ public sealed class CommandHandler
         }
         else
             newArgs = args;
+        var cmdData = new CommandData()
+        {
+            Data = data
+        };
         cmdInfo.Command.Execute(newArgs.ToArray(), data);
     }
 
