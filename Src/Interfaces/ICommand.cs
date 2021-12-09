@@ -2,6 +2,6 @@ namespace CommandHandlerFramework;
 
 public interface ICommand
 {
-    void Execute(string[] args, params object[]? data);
+    void Execute(string[] args, CommandData data);
     object? GetDescription();
 }

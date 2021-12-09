@@ -145,7 +145,7 @@ public sealed class CommandHandler
         {
             Data = data
         };
-        cmdInfo.Command.Execute(newArgs.ToArray(), data);
+        cmdInfo.Command.Execute(newArgs.ToArray(), cmdData);
     }
 
     private string? FindPrefix(string content)

@@ -52,7 +52,7 @@ class Test : ICommand
         Aliases = new string[] { "t" },
         Category = "General"
     )]
-    public void Execute(string[] args, object[]? data)
+    public void Execute(string[] args, CommandData data)
     {
         Console.WriteLine("The test command has been triggered.");
         Console.WriteLine($"Args: {{ {string.Join(" | ", args)} }}");
