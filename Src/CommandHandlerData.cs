@@ -1,6 +1,6 @@
 namespace CommandHandlerFramework;
 
-public sealed class CommandData
+public sealed class CommandHandlerData
 {
     internal object[]? Data { get; set; }
 

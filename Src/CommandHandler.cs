@@ -141,7 +141,7 @@ public sealed class CommandHandler
         }
         else
             newArgs = args;
-        var cmdData = new CommandData()
+        var cmdData = new CommandHandlerData()
         {
             Data = data
         };
