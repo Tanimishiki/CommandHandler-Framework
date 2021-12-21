@@ -135,6 +135,12 @@ public sealed class CommandHandler
         List<string> newArgs;
         if (cmdInfo.Args > 0)
         {
+            if (cmdInfo.Args > args.Count)
+            {
+                for (int i = 0; i <= cmdInfo.Args - (args.Count - 1); i++)
+                    args.Add("");
+            }
+
             newArgs = args.GetRange(0, cmdInfo.Args);
             args.RemoveRange(0, cmdInfo.Args);
             newArgs.Add(string.Join(" ", args));
