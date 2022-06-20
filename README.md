@@ -4,60 +4,50 @@ An easy command handler for C# .NET.
 
 ## Setup of command handler
 ```cs
+using CommandHandler;
+using CommandHandler.Components;
+using CommandHandler.Enums;
 using System.Reflection;
 
-using CommandHandlerFramework;
-
-namespace Testing;
+namespace Main;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        var handler = new CommandHandler(
+        var text = new TextCH(
             assembly: Assembly.GetExecutingAssembly(),
-            withSpacePrefix: false,
-            prefixes: new string[] { ">", "=>", "-" }
+            prefixes: new ComandPrefixes() { ">", ">/" }
         );
-        handler.Start(); // To start the command handler.
+        text.SetMode(CommandMode.ConnectedPrefix);
 
-        // To run the command.
-        handler.Execute(">test Hello, World!");
-        handler.Execute("=>test Goodbye, World!");
+        CommandResponse response = text.Execute(">t", "Hello!", "Goodbye!");
 
-        // To get the description of command.
-        Console.WriteLine("\nDescription of command:");
-        Console.WriteLine(handler.GetCommandDescription("test"));
-        Console.WriteLine(handler.GetCommandDescription("t"));
-
-        // To get the commands from category.
-        Console.WriteLine($"\nGeneral Commands: {string.Join(" | ", handler.GetCommandsFromCategory("General"))}");
-
-        // To get all of the commands from the assembly.
-        Console.WriteLine($"\nCommands: {string.Join(" | ", handler.GetCommands())}");
+        Console.WriteLine($"Status: {response.Status}");
+        Console.WriteLine($"Prefix Used: {response.PrefixUsed}");
+        Console.WriteLine($"Command Used: {response.CommandUsed}");
     }
 }
 ```
 ## Setup of command
 ```cs
-using CommandHandlerFramework;
+using CommandHandler;
 
 namespace Testing.Commands;
 
-class Test : ICommand
+class Test : ITextCommand
 {
-    [Command(
+    [TextCommand(
         Name = "test",
-        Args = 1,
         Aliases = new string[] { "t" },
-        Category = "General"
+        Args = 1,
+        Disabled = false
     )]
-    public void Execute(string[] args, CommandHandlerData data)
+    public void Execute(string[] args, PassedContents data)
     {
-        Console.WriteLine("The test command has been triggered.");
-        Console.WriteLine($"Args: {{ {string.Join(" | ", args)} }}");
+        // Expected output:
+        //      Message: Hello!
+        Console.WriteLine($"Message: {data.Get<string>(index: 0)}");
     }
-
-    public object? GetDescription() => "This is just a test.";
 }
 ```
